@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Abdelrahman & Marwa Wedding</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Poppins:wght@300;400&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:#000;
+color:#fff;
+overflow-x:hidden;
+}
+
+/* HERO */
+.hero{
+min-height:100vh;
+height:auto;
+padding:60px 20px;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+background:
+linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1800&auto=format&fit=crop');
+background-size:cover;
+background-position:center;
+}
+
+.hero-content{
+padding:20px;
+max-width:900px;
+}
+
+.subtitle{
+letter-spacing:4px;
+color:#d4af37;
+font-size:14px;
+margin-bottom:20px;
+}
+
+/* FIXED FONT */
+.names{
+font-family:'Playfair Display', serif;
+font-size:70px;
+line-height:1.1;
+color:#fff;
+}
+
+.date{
+font-size:22px;
+margin-top:15px;
+}
+
+.countdown{
+margin-top:35px;
+display:flex;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.box{
+background:rgba(212,175,55,.15);
+border:1px solid #d4af37;
+padding:12px;
+min-width:75px;
+border-radius:12px;
+transition:0.3s;
+}
+
+.box span{
+font-size:28px;
+font-weight:bold;
+display:block;
+color:#d4af37;
+}
+
+.section{
+padding:80px 20px;
+text-align:center;
+}
+
+.section h2{
+font-family:'Cormorant Garamond',serif;
+font-size:45px;
+margin-bottom:20px;
+color:#d4af37;
+}
+
+.venue{
+font-size:22px;
+margin-bottom:20px;
+}
+
+.btn{
+display:inline-block;
+padding:14px 30px;
+margin:10px;
+background:#d4af37;
+color:black;
+text-decoration:none;
+border-radius:40px;
+font-weight:bold;
+}
+
+.form{
+max-width:500px;
+margin:auto;
+}
+
+input{
+width:100%;
+padding:15px;
+margin:10px 0;
+border:none;
+border-radius:10px;
+}
+
+button{
+width:100%;
+padding:15px;
+background:#d4af37;
+border:none;
+border-radius:10px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.success{
+display:none;
+margin-top:15px;
+color:#6fff8c;
+}
+
+footer{
+padding:30px;
+text-align:center;
+opacity:.7;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+.names{font-size:45px;}
+.date{font-size:18px;}
+.section h2{font-size:32px;}
+.venue{font-size:18px;}
+}
+
+@media(min-width:1200px){
+.names{font-size:85px;}
+.section{padding:100px 20px;}
+}
+
+.box:hover{
+transform:scale(1.05);
+}
+
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+<div class="hero-content">
+
+<div class="subtitle">
+we are honored to invite you to our wedding
+</div>
+
+<h1 class="names">
+Abdelrahman <br>&<br> Marwa
+</h1>
+
+<div class="date">
+7 August 2026 • 7:00 PM
+</div>
+
+<div class="countdown">
+<div class="box"><span id="days">0</span>Days</div>
+<div class="box"><span id="hours">0</span>Hours</div>
+<div class="box"><span id="minutes">0</span>Minutes</div>
+<div class="box"><span id="seconds">0</span>Seconds</div>
+</div>
+
+</div>
+</section>
+
+<section class="section">
+
+<h2>Wedding Venue</h2>
+
+<div class="venue">
+Blue Berry Villa
+</div>
+
+<a class="btn" href="https://maps.app.goo.gl/KBbmuEbkX3P4Xjg58" target="_blank">
+View Location
+</a>
+
+</section>
+
+<section class="section">
+
+<h2>تأكيد الحضور </h2>
+
+<form class="form" id="rsvpForm">
+
+<input type="text" id="name" placeholder="إسمك الكريم" required>
+<input type="number" id="guests" placeholder="عدد الأفراد" required>
+
+<button type="submit">تأكيد الحضور</button>
+
+<div class="success" id="success">
+تم تأكيد حضورك ؛ هنستناك متتأخرش😉♥️
+</div>
+
+</form>
+
+</section>
+
+<footer>
+Abdelrahman & Marwa • 2026
+</footer>
+
+<script>
+
+const weddingDate = new Date("August 7, 2026 19:00:00").getTime();
+
+setInterval(() => {
+
+const now = new Date().getTime();
+const distance = weddingDate - now;
+
+if(distance < 0){
+document.getElementById("days").innerHTML = 0;
+document.getElementById("hours").innerHTML = 0;
+document.getElementById("minutes").innerHTML = 0;
+document.getElementById("seconds").innerHTML = 0;
+return;
+}
+
+document.getElementById("days").innerHTML =
+Math.floor(distance/(1000*60*60*24));
+
+document.getElementById("hours").innerHTML =
+Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+
+document.getElementById("minutes").innerHTML =
+Math.floor((distance%(1000*60*60))/(1000*60));
+
+document.getElementById("seconds").innerHTML =
+Math.floor((distance%(1000*60))/1000);
+
+},1000);
+
+
+/* IMPORTANT: ضع رابط Google Apps Script هنا */
+const SCRIPT_URL = "";
+
+document.getElementById("rsvpForm")
+.addEventListener("submit", async function(e){
+
+e.preventDefault();
+
+const data = {
+name: document.getElementById("name").value,
+guests: document.getElementById("guests").value
+};
+
+if(SCRIPT_URL){
+await fetch(SCRIPT_URL,{
+method:"POST",
+body:JSON.stringify(data)
+});
+}
+
+document.getElementById("success").style.display="block";
+this.reset();
+
+});
+
+</script>
+
+</body>
+</html>
